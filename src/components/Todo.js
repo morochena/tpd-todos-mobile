@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, Dimensions } from "react-native";
 import { graphql, createFragmentContainer } from "react-relay";
+import { MaterialIcons } from "@expo/vector-icons";
 
 const { width, height } = Dimensions.get("window");
 const padding = 20;
@@ -32,8 +33,11 @@ class Todo extends React.Component<Props> {
           shadowOffset: { width: 4, height: 4 }
         }}
       >
-        <Text>{title}</Text>
-        <Text>{description}</Text>
+        <MaterialIcons name="edit" size={32} color="black" />
+        <Text style={{ fontSize: 24, textAlign: "center" }}>{title}</Text>
+        <Text style={{ fontSize: 18, textAlign: "center", marginTop: 10 }}>
+          {description}
+        </Text>
         <Text>{completed}</Text>
       </View>
     );
