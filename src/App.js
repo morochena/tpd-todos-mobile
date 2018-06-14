@@ -1,24 +1,20 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { LinearGradient } from "expo";
+import { createStackNavigator } from "react-navigation";
 
 import TodoList from "./components/TodoList";
+import CreateTodo from "./components/CreateTodo";
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <View style={{ flex: 1 }}>
-        <LinearGradient
-          colors={["#FBD786", "#f7797d"]}
-          start={[0, 0.5]}
-          end={[1, 0.5]}
-          style={{ flex: 1 }}
-        >
-          <TodoList style={{ flex: 1 }} />
-        </LinearGradient>
-      </View>
-    );
+export default createStackNavigator(
+  {
+    TodoList: {
+      screen: TodoList
+    },
+    CreateTodo: {
+      screen: CreateTodo
+    }
+  },
+  {
+    headerMode: "none"
   }
-}
-
-const styles = StyleSheet.create({});
+);
