@@ -16,7 +16,8 @@ function commit(input, onCompleted, onError) {
   return commitMutation(environment, {
     mutation,
     variables: {
-      input
+      title: input.title,
+      description: input.description
     },
     onCompleted,
     onError

@@ -30,11 +30,11 @@ export default class CreateTodo extends React.Component {
     };
 
     const onCompleted = () => {
-      console.log("Success!");
+      this.props.navigation.goBack();
     };
 
     const onError = () => {
-      console.log("Oh noes!");
+      this.props.navigation.goBack();
     };
 
     CreateTodoMutation.commit(input, onCompleted, onError);
@@ -44,38 +44,59 @@ export default class CreateTodo extends React.Component {
     const { title, description } = this.state;
 
     return (
-      <View
-        style={{
-          width: width - padding * 2,
-          height: height - padding * 10,
-          margin: padding,
-          marginTop: padding * 3,
-          backgroundColor: "#efefef",
-          borderRadius: 3,
-          padding: padding,
-          shadowColor: "#222",
-          shadowRadius: 3,
-          shadowOffset: { width: 4, height: 4 }
-        }}
+      <LinearGradient
+        colors={["#FBD786", "#f7797d"]}
+        start={[0, 0.5]}
+        end={[1, 0.5]}
+        style={{ flex: 1 }}
       >
-        <TextInput
-          name="title"
-          placeholder="Title"
-          value={title}
-          onChangeText={value => this.setState({ title: value })}
-          style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
-        />
-        <TextInput
-          name="description"
-          placeholder="Description"
-          value={description}
-          onChangeText={value => this.setState({ description: value })}
-          style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
-        />
-        <TouchableOpacity onPress={() => this.handleCreateTodo()}>
-          <Text>Create Todo</Text>
+        <View
+          style={{
+            width: width - padding * 2,
+            height: height - padding * 10,
+            margin: padding,
+            marginTop: padding * 3,
+            backgroundColor: "#efefef",
+            borderRadius: 3,
+            padding: padding,
+            shadowColor: "#222",
+            shadowRadius: 3,
+            shadowOffset: { width: 4, height: 4 }
+          }}
+        >
+          <TextInput
+            name="title"
+            placeholder="Title"
+            value={title}
+            onChangeText={value => this.setState({ title: value })}
+            style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
+          />
+          <TextInput
+            name="description"
+            placeholder="Description"
+            value={description}
+            onChangeText={value => this.setState({ description: value })}
+            style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
+          />
+          <TouchableOpacity onPress={() => this.handleCreateTodo()}>
+            <Text>Create Todo</Text>
+          </TouchableOpacity>
+        </View>
+        <TouchableOpacity
+          style={{
+            height: height * 0.08,
+            width: width * 0.7,
+            alignItems: "center",
+            justifyContent: "center",
+            backgroundColor: "#e67e22",
+            borderRadius: 5,
+            alignSelf: "center"
+          }}
+          onPress={() => this.props.navigation.goBack()}
+        >
+          <Text style={{ color: "white" }}>Back</Text>
         </TouchableOpacity>
-      </View>
+      </LinearGradient>
     );
   }
 }
