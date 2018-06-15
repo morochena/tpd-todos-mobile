@@ -15,7 +15,7 @@ import TodoList from "./TodoList";
 const query = graphql`
   query TodoListScreenQuery {
     allTodos {
-      ...Todo_todo
+      ...TodoList_allTodos
     }
   }
 `;

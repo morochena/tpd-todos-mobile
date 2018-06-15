@@ -37,7 +37,7 @@ class TodoList extends React.Component {
             snapToAlignment={"center"}
             showsHorizontalScrollIndicator={false}
           >
-            {todos.map(todo => <Todo key={todo.id} todo={todo} />)}
+            {todos.map(todo => <Todo key={todo.__id} todo={todo} />)}
           </ScrollView>
           <View
             style={{

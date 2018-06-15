@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 750bad093ce4e6eb3de8aad7ee6af653
+ * @relayHash 9162b1f3c5d567fd2a0ba2f4a500fc00
  */
 
 /* eslint-disable */
@@ -9,11 +9,11 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-type Todo_todo$ref = any;
+type TodoList_allTodos$ref = any;
 export type TodoListScreenQueryVariables = {||};
 export type TodoListScreenQueryResponse = {|
   +allTodos: $ReadOnlyArray<?{|
-    +$fragmentRefs: Todo_todo$ref
+    +$fragmentRefs: TodoList_allTodos$ref
   |}>
 |};
 */
@@ -22,9 +22,13 @@ export type TodoListScreenQueryResponse = {|
 /*
 query TodoListScreenQuery {
   allTodos {
-    ...Todo_todo
+    ...TodoList_allTodos
     id
   }
+}
+
+fragment TodoList_allTodos on Todo {
+  ...Todo_todo
 }
 
 fragment Todo_todo on Todo {
@@ -40,7 +44,7 @@ const node/*: ConcreteRequest*/ = {
   "operationKind": "query",
   "name": "TodoListScreenQuery",
   "id": null,
-  "text": "query TodoListScreenQuery {\n  allTodos {\n    ...Todo_todo\n    id\n  }\n}\n\nfragment Todo_todo on Todo {\n  id\n  title\n  description\n  completed\n}\n",
+  "text": "query TodoListScreenQuery {\n  allTodos {\n    ...TodoList_allTodos\n    id\n  }\n}\n\nfragment TodoList_allTodos on Todo {\n  ...Todo_todo\n}\n\nfragment Todo_todo on Todo {\n  id\n  title\n  description\n  completed\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -60,7 +64,7 @@ const node/*: ConcreteRequest*/ = {
         "selections": [
           {
             "kind": "FragmentSpread",
-            "name": "Todo_todo",
+            "name": "TodoList_allTodos",
             "args": null
           }
         ]
@@ -115,5 +119,5 @@ const node/*: ConcreteRequest*/ = {
   }
 };
 // prettier-ignore
-(node/*: any*/).hash = '4573d21488e10515cddae5528f01cf2b';
+(node/*: any*/).hash = 'b61d46f2ed11279beca2de4854284d6a';
 module.exports = node;
