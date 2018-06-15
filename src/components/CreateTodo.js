@@ -69,17 +69,42 @@ export default class CreateTodo extends React.Component {
             placeholder="Title"
             value={title}
             onChangeText={value => this.setState({ title: value })}
-            style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
+            style={{
+              margin: 5,
+              height: 40,
+              borderColor: "gray",
+              borderWidth: 1
+            }}
           />
           <TextInput
             name="description"
             placeholder="Description"
+            multiline={true}
+            numberOfLines={4}
+            maxLength={140}
             value={description}
             onChangeText={value => this.setState({ description: value })}
-            style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
+            style={{
+              margin: 5,
+              height: 40 * 4,
+              borderColor: "gray",
+              borderWidth: 1
+            }}
           />
-          <TouchableOpacity onPress={() => this.handleCreateTodo()}>
-            <Text>Create Todo</Text>
+          <TouchableOpacity
+            style={{
+              height: height * 0.08,
+              width: width * 0.7,
+              marginTop: 20,
+              alignItems: "center",
+              justifyContent: "center",
+              backgroundColor: "#e67e22",
+              borderRadius: 5,
+              alignSelf: "center"
+            }}
+            onPress={() => this.handleCreateTodo()}
+          >
+            <Text style={{ color: "white" }}>Create Todo</Text>
           </TouchableOpacity>
         </View>
         <TouchableOpacity
