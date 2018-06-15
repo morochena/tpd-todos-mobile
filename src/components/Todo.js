@@ -3,7 +3,8 @@ import { View, Text, Dimensions, TouchableOpacity } from "react-native";
 import { graphql, createFragmentContainer } from "react-relay";
 import { MaterialIcons } from "@expo/vector-icons";
 
-import DeleteTodoMutation from "../mutations/DeleteTodoMutation.js";
+import DeleteTodoMutation from "../mutations/DeleteTodoMutation";
+import ToggleTodoMutation from "../mutations/ToggleTodoMutation";
 
 const { width, height } = Dimensions.get("window");
 const padding = 20;
@@ -19,6 +20,18 @@ class Todo extends React.Component {
     const onError = () => {};
 
     DeleteTodoMutation.commit(input, onCompleted, onError);
+  };
+
+  handleToggleTodo = () => {
+    const input = {
+      id: this.props.todo.id
+    };
+
+    const onCompleted = () => {};
+
+    const onError = () => {};
+
+    ToggleTodoMutation.commit(input, onCompleted, onError);
   };
 
   render() {
@@ -59,7 +72,21 @@ class Todo extends React.Component {
         <Text style={{ fontSize: 18, textAlign: "center", marginTop: 10 }}>
           {description}
         </Text>
-        <Text>{completed}</Text>
+        <TouchableOpacity
+          onPress={() => this.handleToggleTodo()}
+          style={{ alignSelf: "center", alignItems: "center" }}
+        >
+          {completed && (
+            <MaterialIcons name="check-box" size={128} color="green" />
+          )}
+          {!completed && (
+            <MaterialIcons
+              name="check-box-outline-blank"
+              size={128}
+              color="black"
+            />
+          )}
+        </TouchableOpacity>
       </View>
     );
   }

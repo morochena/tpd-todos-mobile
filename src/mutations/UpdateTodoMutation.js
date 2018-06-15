@@ -2,9 +2,11 @@ import { graphql, commitMutation } from "react-relay";
 import environment from "../Environment";
 
 const mutation = graphql`
-  mutation ToggleTodoMutation($id: ID!) {
-    toggleTodo(id: $id) {
+  mutation UpdateTodoMutation($id: ID!, $title: String, $description: String) {
+    updateTodo(id: $id, title: $title, description: $description) {
       id
+      title
+      description
     }
   }
 `;
@@ -13,15 +15,15 @@ function commit(input, onCompleted, onError) {
   return commitMutation(environment, {
     mutation,
     variables: {
-      id: input.id
+      id: input.id,
+      title: input.title,
+      description: input.description
     },
     updater: proxyStore => {
-      const todo = proxyStore.get(input.id);
-      todo.setValue(!todo.getValue("completed"), "completed");
+      //
     },
     optimisticUpdater: proxyStore => {
-      const todo = proxyStore.get(input.id);
-      todo.setValue(!todo.getValue("completed"), "completed");
+      //
     },
     onCompleted,
     onError

@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
 
-import testReducer from "./testReducer";
+import selectedTodoReducer from "./selectedTodoReducer";
 
-const rootReducer = combineReducers({ testReducer });
+const rootReducer = combineReducers({ selectedTodoReducer });
 
 export default rootReducer;
