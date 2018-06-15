@@ -4,10 +4,12 @@ import {
   Text,
   ScrollView,
   Dimensions,
-  TouchableOpacity
+  TouchableOpacity,
+  ActivityIndicator
 } from "react-native";
 import { graphql, createFragmentContainer, QueryRenderer } from "react-relay";
 import { LinearGradient } from "expo";
+import hoistStatics from "hoist-non-react-statics";
 
 import environment from "../Environment";
 
@@ -76,7 +78,7 @@ const query = graphql`
   }
 `;
 
-export default props => (
+const TodoListQueryRenderer = () => (
   <QueryRenderer
     environment={environment}
     variables={{}}
@@ -85,8 +87,10 @@ export default props => (
       if (error) {
         //Here we pass our error view in case of query errors or fetch failture
         return (
-          <View>
-            <Text>Error!</Text>
+          <View
+            style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
+          >
+            <Text>Error connecting to server!</Text>
           </View>
         );
       } else if (props) {
@@ -95,10 +99,14 @@ export default props => (
       }
       //Here goes our activity indicator or loading view
       return (
-        <View>
-          <Text>Loading...</Text>
+        <View
+          style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
+        >
+          <ActivityIndicator size="large" color="#e67e22" />
         </View>
       );
     }}
   />
 );
+
+export default hoistStatics(TodoListQueryRenderer, TodoList);

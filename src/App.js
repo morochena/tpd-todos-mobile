@@ -15,6 +15,7 @@ export default createStackNavigator(
     }
   },
   {
-    headerMode: "none"
+    headerMode: "none",
+    initialRouteName: "TodoList"
   }
 );
