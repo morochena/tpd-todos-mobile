@@ -6,15 +6,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 const { width, height } = Dimensions.get("window");
 const padding = 20;
 
-type Props = {
-  todo: {
-    title: string,
-    description: string,
-    completed: boolean
-  }
-};
-
-class Todo extends React.Component<Props> {
+class Todo extends React.Component {
   render() {
     const { id, title, description, completed } = this.props.todo;
 

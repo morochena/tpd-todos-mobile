@@ -5,12 +5,15 @@ import {
   ScrollView,
   Dimensions,
   TouchableOpacity,
-  Input
+  TextInput
 } from "react-native";
 import { graphql, createFragmentContainer, QueryRenderer } from "react-relay";
 import { LinearGradient } from "expo";
 
 import CreateTodoMutation from "../mutations/CreateTodoMutation.js";
+
+const { width, height } = Dimensions.get("window");
+const padding = 20;
 
 export default class CreateTodo extends React.Component {
   state = {
@@ -55,17 +58,19 @@ export default class CreateTodo extends React.Component {
           shadowOffset: { width: 4, height: 4 }
         }}
       >
-        <Input
+        <TextInput
           name="title"
           placeholder="Title"
           value={title}
           onChangeText={value => this.setState({ title: value })}
+          style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
         />
-        <Input
+        <TextInput
           name="description"
           placeholder="Description"
           value={description}
           onChangeText={value => this.setState({ description: value })}
+          style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
         />
         <TouchableOpacity onPress={() => this.handleCreateTodo()}>
           <Text>Create Todo</Text>

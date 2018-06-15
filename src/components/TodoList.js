@@ -19,8 +19,7 @@ const { width, height } = Dimensions.get("window");
 
 class TodoList extends React.Component {
   render() {
-    const { allTodos } = this.props;
-    console.log(this.props);
+    const todos = this.props.allTodos;
 
     return (
       <View style={{ flex: 1 }}>
@@ -38,7 +37,7 @@ class TodoList extends React.Component {
             snapToAlignment={"center"}
             showsHorizontalScrollIndicator={false}
           >
-            {allTodos.map(todo => <Todo key={todo.id} todo={todo} />)}
+            {todos.map(todo => <Todo key={todo.id} todo={todo} />)}
           </ScrollView>
           <View
             style={{
@@ -67,46 +66,11 @@ class TodoList extends React.Component {
   }
 }
 
-const query = graphql`
-  query TodoListQuery {
-    allTodos {
-      id
-      title
-      description
-      completed
+export default createFragmentContainer(
+  TodoList,
+  graphql`
+    fragment TodoList_allTodos on Todo @relay(plural: true) {
+      ...Todo_todo
     }
-  }
-`;
-
-const TodoListQueryRenderer = () => (
-  <QueryRenderer
-    environment={environment}
-    variables={{}}
-    query={query}
-    render={({ error, props }) => {
-      if (error) {
-        //Here we pass our error view in case of query errors or fetch failture
-        return (
-          <View
-            style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
-          >
-            <Text>Error connecting to server!</Text>
-          </View>
-        );
-      } else if (props) {
-        //Here we pass our component that should be rendered
-        return <TodoList {...props} />;
-      }
-      //Here goes our activity indicator or loading view
-      return (
-        <View
-          style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
-        >
-          <ActivityIndicator size="large" color="#e67e22" />
-        </View>
-      );
-    }}
-  />
+  `
 );
-
-export default hoistStatics(TodoListQueryRenderer, TodoList);
