@@ -1,0 +1,9 @@
+{
+  "expo": {
+    "name": "TPD Todos Mobile",
+    "slug": "tpd-todos-mobile",
+    "sdkVersion": "27.0.1",
+    "privacy": "unlisted",
+    "orientation": "portrait"
+  }
+}
