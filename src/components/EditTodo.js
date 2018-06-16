@@ -17,5 +17,7 @@ const { width, height } = Dimensions.get("window");
 const padding = 20;
 
 export default class EditTodo extends React.Component {
-  render() {}
+  render() {
+    return <View />;
+  }
 }
