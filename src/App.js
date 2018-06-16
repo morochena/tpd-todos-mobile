@@ -1,30 +1,29 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
 import { createStackNavigator } from "react-navigation";
 import { Provider } from "react-redux";
 
 import configureStore from "./store/configureStore";
-import TodoListScreen from "./components/TodoListScreen";
+import TodoListRelayContainer from "./relay_containers/TodoListRelayContainer";
 import CreateTodo from "./components/CreateTodo";
-import EditTodoContainer from "./components/EditTodoContainer";
+import EditTodoReduxContainer from "./redux_containers/EditTodoReduxContainer";
 
 const store = configureStore();
 
 const StackNavigator = createStackNavigator(
   {
-    TodoListScreen: {
-      screen: TodoListScreen
+    TodoList: {
+      screen: TodoListRelayContainer
     },
     CreateTodo: {
       screen: CreateTodo
     },
-    EditTodoContainer: {
-      screen: EditTodoContainer
+    EditTodo: {
+      screen: EditTodoReduxContainer
     }
   },
   {
     headerMode: "none",
-    initialRouteName: "TodoListScreen"
+    initialRouteName: "TodoList"
   }
 );
 
